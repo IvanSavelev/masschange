@@ -165,15 +165,41 @@
         </div>
     </div>
 
+	<!-- CHOICE OF COLUMNS -->
+	<div class="well">
+		<div class="row">
+			<div class="col-sm-4 col-lg-4 row form-group">
+				<button type="submit"
+						title="{l s='Activate all selected products' mod='masschange'}"
+						name="massive_active_on_button"
+						class="btn btn-default">
+					<i class="icon-power-off text-success"></i> {l s='Activate' mod='masschange'}
+				</button>
+			</div>
+
+			<div class="col-sm-5 col-lg-5 row form-group">
+				<select name="massive_id_tax_rules_group" class="col-sm-4">
+					<option value="0" selected="selected">{l s='No Tax' mod='masschange'}</option>
+					{foreach from=$tax_rules_groups item=tax_rules_group}
+						<option {if $tax_exclude_tax_option}disabled="disabled" {/if}
+								value="{$tax_rules_group['id_tax_rules_group']|escape:'quotes':'UTF-8'}">
+							{$tax_rules_group['name']|escape:'quotes':'UTF-8'}
+						</option>
+					{/foreach}
+				</select>
+			</div>
+		</div>
+	</div>
+
 </form>
 
 
 
-<form method="post" action="{$current_url|escape:'htmlall':'UTF-8'}" class="form-horizontal clearfix" id="form-product">
+<form method="post" action="{$current_url|escape:'htmlall':'UTF-8'}" class="form-horizontal clearfix" id="form-product" style="display:inline-block;  width: 1300px;   overflow-x: scroll;">
 <input type="hidden" name="save_all" value="1"/>
-<div class="row">
+<div class="row" style="width:3000px;">
 
-<table class="table">
+<table class="table" style="border: 5px double #000;">
 <thead>
 <tr>
     <th class="fixed-width-xs center"></th>
@@ -225,6 +251,22 @@
                 </a>
 			</span>
     </th>
+
+	<th class="center">
+		<span class="">{l s='Summary' mod='masschange'}</span>
+	</th>
+
+	<th class="center">
+		<span class="">{l s='Description' mod='masschange'}</span>
+	</th>
+
+	<th class="center">
+		<span class="">{l s='Meta title' mod='masschange'}</span>
+	</th>
+
+	<th class="center">
+		<span class="">{l s='Meta description' mod='masschange'}</span>
+	</th>
 
     <th class=" text-right">
 			<span class="title_box">{l s='Base price' mod='masschange'}
@@ -289,6 +331,22 @@
         <input type="text" class="filter" name="find_data[category]" value="{if isset($find_data['category'])}{$find_data['category']|escape:'html':'UTF-8'}{/if}">
     </th>
 
+	<th class="center">
+		--
+	</th>
+
+	<th class="center">
+		--
+	</th>
+
+	<th class="center">
+		--
+	</th>
+
+	<th class="center">
+		--
+	</th>
+
     <th class="text-right">
         <input type="text" class="filter" pattern="\d+(\.\d*)?" name="find_data[base_price]" value="{if isset($find_data['base_price'])}{$find_data['base_price']|escape:'html':'UTF-8'}{/if}">
     </th>
@@ -325,7 +383,7 @@
 
 </thead>
 
-{if $products|count > 0}
+{if $products|count > 0 && $products != null}
     <tbody>
     {foreach from=$products key=k item=product}
         <tr class="">
@@ -349,6 +407,26 @@
             <td class="left">{$product['reference']|escape:'html':'UTF-8'}</td>
 
             <td class="pointer text-left">{$product['name_category']|escape:'html':'UTF-8'}</td>
+
+
+
+			<td class="pointer  text-right">
+				<textarea class="" name="description_short[{$product['id_product']|escape:'html':'UTF-8'}]">{strip_tags($product['description_short']|escape:'quotes':'UTF-8')}</textarea>
+			</td>
+
+			<td class="pointer  text-right">
+				<textarea class="" name="description[{$product['id_product']|escape:'html':'UTF-8'}]">{strip_tags($product['description'])}</textarea>
+			</td>
+
+			<td class="pointer  text-right">
+				<input type="text" class="" name="meta_title[{$product['id_product']|escape:'html':'UTF-8'}]" value="{strip_tags($product['meta_title']|escape:'html':'UTF-8')}">
+			</td>
+
+			<td class="pointer  text-right">
+				<input type="text" class="" name="meta_description[{$product['id_product']|escape:'html':'UTF-8'}]" value="{strip_tags($product['meta_description']|escape:'html':'UTF-8')}">
+			</td>
+
+
 
             <td class="pointer fixed-width-md text-right">
                 <div class="input-group">

@@ -7,6 +7,11 @@ td img {
     max-width: none!important;
 }
 
+.bootstrap .table tbody>tr>td {
+    border: 1px solid #8c2222!important;
+
+}
+
 #category_check {
     text-decoration: underline;
     color: #0077a4;

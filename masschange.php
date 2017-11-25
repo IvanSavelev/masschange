@@ -179,6 +179,15 @@ class MassChange extends Module
             }
         }
 
+        if (version_compare(_PS_VERSION_, '1.7.0', '>=') === true) {
+            $limit_description_short = (int)Configuration::get('PS_PRODUCT_SHORT_DESC_LIMIT') <= 0 ?
+                800 : (int)Configuration::get('PS_PRODUCT_SHORT_DESC_LIMIT');
+            $limit_description = 6000;
+        } else {
+            $limit_description_short = Configuration::get('PS_PRODUCT_SHORT_DESC_LIMIT') ? Configuration::get('PS_PRODUCT_SHORT_DESC_LIMIT') : 400;
+            $limit_description = 100500;
+        }
+
 
         $products = $this->getProductsData($filter_data, $find_data, (int)Tools::getValue('id_category'));
         if (count($products) > 1000 && !Tools::getIsset('open_category')) {

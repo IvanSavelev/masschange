@@ -31,14 +31,18 @@ class MassChangeModel extends ObjectModel
 
         $sql = "
           SELECT
-          `" . _DB_PREFIX_ . "product`.`id_product`,
-          `id_image`,
-          `" . _DB_PREFIX_ . "product_lang`.`name`,
-          `" . _DB_PREFIX_ . "product`.`reference`,
-          `" . _DB_PREFIX_ . "category_lang`.`name` AS name_category,
-          `" . _DB_PREFIX_ . "product`.`price`,
-          `" . _DB_PREFIX_ . "product`.`active`,
-          `" . _DB_PREFIX_ . "stock_available`.`quantity`
+          " . _DB_PREFIX_ . "product.id_product,
+          id_image,
+          " . _DB_PREFIX_ . "product_lang.name,
+          " . _DB_PREFIX_ . "product.reference,
+          " . _DB_PREFIX_ . "category_lang.name AS name_category,
+          " . _DB_PREFIX_ . "product.price,
+          " . _DB_PREFIX_ . "product.active,
+          " . _DB_PREFIX_ . "stock_available.quantity,
+          " . _DB_PREFIX_ . "product_lang.description,
+          " . _DB_PREFIX_ . "product_lang.description_short,
+          " . _DB_PREFIX_ . "product_lang.meta_description,
+          " . _DB_PREFIX_ . "product_lang.meta_title
 
           ";
 
